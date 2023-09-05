@@ -6,6 +6,11 @@
 
 **Problemática: Gestión de Reservas de Áreas Comunes en la Unidad Residencial Zanetti**
 
+**Diagrama UML**
+
+<img width="805" alt="CleanShot 2023-09-05 at 16 55 13@2x" src="https://github.com/upb-danielfuentes/df-crud-zanetti/assets/141572206/fb397c24-37bb-48c7-bcae-6b86cb8f7cb4">
+
+
 **Descripción del Problema:**
 En la unidad residencial Zanetti se cuenta con varias áreas comunes, como salones de eventos, piscinas, canchas deportivas, etc., que los residentes pueden reservar para su uso. Actualmente, la gestión de estas reservas se lleva a cabo de manera manual, lo que genera ineficiencias, confusiones y conflictos de programación.
 
@@ -33,4 +38,3 @@ Desarrollar una aplicación de gestión de reservas utilizando Python y programa
 
 Esta solución permitirá a la unidad residencial gestionar de manera eficiente las reservas de sus áreas comunes, evitando conflictos y mejorando la satisfacción de los residentes.
 
-![Alt text](image.png)
