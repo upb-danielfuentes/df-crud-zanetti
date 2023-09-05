@@ -32,3 +32,5 @@ Desarrollar una aplicación de gestión de reservas utilizando Python y programa
 - **Funciones CRUD:** Se implementarán funciones para crear, leer, actualizar y eliminar reservas y áreas comunes.
 
 Esta solución permitirá a la unidad residencial gestionar de manera eficiente las reservas de sus áreas comunes, evitando conflictos y mejorando la satisfacción de los residentes.
+
+![Alt text](image.png)
