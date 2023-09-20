@@ -2,7 +2,7 @@
 
 **UPB**
 
-**Actividad Evaluativa 02-09-23 - 15%**
+**Actividad Evaluativa 20-09-23**
 
 **Problemática: Gestión de Reservas de Áreas Comunes en la Unidad Residencial Zanetti**
 
