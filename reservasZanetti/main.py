@@ -1,4 +1,4 @@
-import reserva.reservas_gui as gui
+import gui as gui
 
 if __name__ == "__main__":
     gui.main()

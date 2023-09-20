@@ -3,6 +3,7 @@ from tkinter import ttk
 from tkinter import messagebox
 import ttkthemes as themes
 import reserva as res
+import horario as hor
 
 def main():
     window.mainloop()
@@ -90,6 +91,73 @@ def eliminar_reserva():
     else:
         messagebox.showwarning("Error en el sistema", "Debe ingresar un valor numérico en el ID")
 
+# Función para listar todas las horarios
+def listar_todas_horarios():
+    result = hor.listar_todos_horario()
+    if result["Respuesta"]:
+        horarios = result["Mensaje"]
+        # Limpiar la tabla antes de actualizarla
+        for i in tree.get_children():
+            tree.delete(i)
+        # Llenar la tabla con los datos de las horarios
+        for horario in horarios:
+            tree.insert("", "end", values=horario)
+    else:
+        messagebox.showerror("Información", result["Mensaje"])
+
+# Función para listar una horario por ID
+def listar_horario_por_id():
+    ID_Horario = id_entry.get()
+    if ID_Horario:
+        result = hor.listar_horario_id(ID_Horario)
+        if result["Respuesta"]:
+            horario = result["Mensaje"]
+            # Limpiar la tabla antes de actualizarla
+            for i in tree.get_children():
+                tree.delete(i)
+            # Llenar la tabla con los datos de la horario
+            tree.insert("", "end", values=horario)
+        else:
+            messagebox.showerror("Información", result["Mensaje"])
+    else:
+        messagebox.showerror("Información", "Por favor, ingrese un ID de horario válido.")
+
+# Función para agregar un nuevo horario
+def agregar_nueva_horario():
+    if id.get().isnumeric():
+        horario = {
+            "id": id_horario_entry.get(),
+            "descripcion": descripcion_entry.get(),
+        }
+        result = hor.agregar_horario(horario)
+        if result["Respuesta"]:
+            messagebox.showinfo("Información", result["Mensaje"])
+            id_entry.delete(0, tk.END)
+            descripcion_entry.delete(0, tk.END)
+        else:
+            messagebox.showwarning("Error en el sistema", "El Id no es un valor numérico")
+
+# Función para actualizar un Horario
+def actualizar_horario():
+    if id_entry.get().isnumeric():
+        horario = {
+            "id": id_entry.get(),
+            "descripcion": descripcion_entry.get(),
+        }
+        result = hor.actualizar_horario(horario)
+        messagebox.showinfo("Función Actualizar", result.get("Mensaje"))
+    else:
+        messagebox.showerror("Información", "Por favor, ingrese un ID de Horario válido.")
+
+# Función para eliminar un Horario
+def eliminar_horario():
+    if id_entry.get() != "" and id_entry.get().isnumeric():
+        id = id_horario_entry.get()
+        respuesta = hor.eliminar_horario(id)
+        messagebox.showinfo("Función Eliminar", respuesta.get("Mensaje"))
+    else:
+        messagebox.showwarning("Error en el sistema", "Debe ingresar un valor numérico en el ID")
+
 # Crear la ventana principal
 window = themes.ThemedTk()
 window.get_themes()
@@ -104,6 +172,8 @@ txtcelular_residente = tk.StringVar()
 txtapto_residente = tk.StringVar()
 txtarea_comun = tk.StringVar()
 txtfecha_reserva = tk.StringVar()
+txtdescripcion = tk.StringVar()
+txtid_horario = tk.StringVar()
 # Fin de la declaración
 
 # Crear una pestaña
@@ -233,7 +303,7 @@ update_button.pack(pady=10)
 
 # Pestaña de Eliminar Reserva
 tab4 = ttk.Frame(notebook)
-notebook.add(tab4, text="Eliminar Reserva")
+notebook.add(tab4, text="Eliminar Reserva ❌")
 
 # Entrada para el ID de reserva a eliminar
 id_label_delete = ttk.Label(tab4, text="ID de Reserva:")
@@ -244,6 +314,82 @@ id_entry_delete.pack()
 # Botón para eliminar una reserva
 delete_button = ttk.Button(tab4, text="Eliminar Reserva", command=eliminar_reserva)
 delete_button.pack(pady=10)
+
+############# LISTAR TODAS LAS HORARIOS ###################
+
+# Pestaña de Listado de Horarios
+tab5 = ttk.Frame(notebook)
+notebook.add(tab5, text="Listado de Horarios 🗂️")
+
+# Botón para listar todas las horarios
+list_button = ttk.Button(tab5, text="Listar Todas los Horarios 🗂️", command=listar_todas_horarios)
+list_button.pack(pady=10)
+
+# Crear una tabla para mostrar las horarios
+columns = ("ID", "Descripcion")
+tree = ttk.Treeview(tab5, columns=columns, show="headings")
+for col in columns:
+    tree.heading(col, text=col)
+tree.pack(padx=10, pady=10)
+
+############# AGREGAR HORARIO ###################
+
+# Pestaña de Agregar Horario
+tab6 = ttk.Frame(notebook)
+notebook.add(tab6, text="Agregar Horario 📆")
+
+# Entradas para agregar un nuevo horario
+descripcion_label = ttk.Label(tab6, text="Nombre Residente:")
+descripcion_label.pack()
+descripcion_entry = ttk.Entry(tab6, textvariable=txtdescripcion)
+descripcion_entry.pack()
+
+# Botón para agregar una nueva horario
+add_button = ttk.Button(tab6, text="Agregar Horario", command=agregar_nueva_horario)
+add_button.pack(pady=10)
+
+############# ACTUALIZAR HORARIO ###################
+
+# Pestaña de Actualizar Horario
+tab7 = ttk.Frame(notebook)
+notebook.add(tab7, text="Actualizar Horario 📖")
+
+# Entrada para el ID del Residente a actualizar
+id_label = ttk.Label(tab7, text="Id Horario:")
+id_label.pack()
+id_horario_entry = ttk.Entry(tab7, textvariable=txtid_horario)
+id_horario_entry.pack()
+
+# Botón para listar una horario por ID
+list_id_button = ttk.Button(tab7, text="Listar Horario por ID", command=listar_horario_por_id)
+list_id_button.pack(pady=10)
+
+# Entradas para actualizar una horario
+update_descripcion_label = ttk.Label(tab7, text="Id Horario:")
+update_descripcion_label.pack()
+update_descripcion_entry = ttk.Entry(tab7, textvariable=txtnombre_residente)
+update_descripcion_entry.pack()
+
+# Botón para actualizar una horario
+update_button = ttk.Button(tab7, text="Actualizar Horario", command=actualizar_horario)
+update_button.pack(pady=10)
+
+############# ELIMINAR HORARIO ###################
+
+# Pestaña de Eliminar Horario
+tab8 = ttk.Frame(notebook)
+notebook.add(tab8, text="Eliminar Horario")
+
+# Entrada para el ID de horario a eliminar
+id_label_delete = ttk.Label(tab8, text="ID de Horario:")
+id_label_delete.pack()
+id_horario_entry = ttk.Entry(tab8, textvariable=txtid_horario)
+id_horario_entry.pack()
+
+# Botón para eliminar una horario
+delete_button = ttk.Button(tab8, text="Eliminar Horario", command=eliminar_horario)
+delete_button.pack(pady=10)
+
 
 ############# INICIA LA APLICACION ###################
 
