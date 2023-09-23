@@ -161,7 +161,7 @@ def eliminar_horario():
 # Crear la ventana principal
 window = themes.ThemedTk()
 window.get_themes()
-window.set_theme("ubuntu")
+window.set_theme("blue")
 window.title("Gestión de Reservas Zanetti 0.0.1")
 
 # Declaración de las variables locales para capturar información
@@ -187,8 +187,8 @@ tab1 = ttk.Frame(notebook)
 notebook.add(tab1, text="Listado de Reservas 🗂️")
 
 # Botón para listar todas las reservas
-list_button = ttk.Button(tab1, text="Listar Todas las Reservas 🗂️", command=listar_todas_reservas)
-list_button.pack(pady=10)
+list_button1 = ttk.Button(tab1, text="Listar Todas las Reservas 🗂️", command=listar_todas_reservas)
+list_button1.pack(pady=10)
 
 # Crear una tabla para mostrar las reservas
 columns = ("ID Reserva", "Cédula Residente", "Nombre Residente", "Apellido Residente", "Celular Residente", "Apartamento", "Área Común", "Fecha Reserva")
@@ -314,82 +314,6 @@ id_entry_delete.pack()
 # Botón para eliminar una reserva
 delete_button = ttk.Button(tab4, text="Eliminar Reserva", command=eliminar_reserva)
 delete_button.pack(pady=10)
-
-############# LISTAR TODAS LAS HORARIOS ###################
-
-# Pestaña de Listado de Horarios
-tab5 = ttk.Frame(notebook)
-notebook.add(tab5, text="Listado de Horarios 🗂️")
-
-# Botón para listar todas las horarios
-list_button = ttk.Button(tab5, text="Listar Todas los Horarios 🗂️", command=listar_todas_horarios)
-list_button.pack(pady=10)
-
-# Crear una tabla para mostrar las horarios
-columns = ("ID", "Descripcion")
-tree = ttk.Treeview(tab5, columns=columns, show="headings")
-for col in columns:
-    tree.heading(col, text=col)
-tree.pack(padx=10, pady=10)
-
-############# AGREGAR HORARIO ###################
-
-# Pestaña de Agregar Horario
-tab6 = ttk.Frame(notebook)
-notebook.add(tab6, text="Agregar Horario 📆")
-
-# Entradas para agregar un nuevo horario
-descripcion_label = ttk.Label(tab6, text="Nombre Residente:")
-descripcion_label.pack()
-descripcion_entry = ttk.Entry(tab6, textvariable=txtdescripcion)
-descripcion_entry.pack()
-
-# Botón para agregar una nueva horario
-add_button = ttk.Button(tab6, text="Agregar Horario", command=agregar_nueva_horario)
-add_button.pack(pady=10)
-
-############# ACTUALIZAR HORARIO ###################
-
-# Pestaña de Actualizar Horario
-tab7 = ttk.Frame(notebook)
-notebook.add(tab7, text="Actualizar Horario 📖")
-
-# Entrada para el ID del Residente a actualizar
-id_label = ttk.Label(tab7, text="Id Horario:")
-id_label.pack()
-id_horario_entry = ttk.Entry(tab7, textvariable=txtid_horario)
-id_horario_entry.pack()
-
-# Botón para listar una horario por ID
-list_id_button = ttk.Button(tab7, text="Listar Horario por ID", command=listar_horario_por_id)
-list_id_button.pack(pady=10)
-
-# Entradas para actualizar una horario
-update_descripcion_label = ttk.Label(tab7, text="Id Horario:")
-update_descripcion_label.pack()
-update_descripcion_entry = ttk.Entry(tab7, textvariable=txtnombre_residente)
-update_descripcion_entry.pack()
-
-# Botón para actualizar una horario
-update_button = ttk.Button(tab7, text="Actualizar Horario", command=actualizar_horario)
-update_button.pack(pady=10)
-
-############# ELIMINAR HORARIO ###################
-
-# Pestaña de Eliminar Horario
-tab8 = ttk.Frame(notebook)
-notebook.add(tab8, text="Eliminar Horario")
-
-# Entrada para el ID de horario a eliminar
-id_label_delete = ttk.Label(tab8, text="ID de Horario:")
-id_label_delete.pack()
-id_horario_entry = ttk.Entry(tab8, textvariable=txtid_horario)
-id_horario_entry.pack()
-
-# Botón para eliminar una horario
-delete_button = ttk.Button(tab8, text="Eliminar Horario", command=eliminar_horario)
-delete_button.pack(pady=10)
-
 
 ############# INICIA LA APLICACION ###################
 

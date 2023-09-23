@@ -13,8 +13,7 @@ def conectar():
 
 def crear_tablas(conexion):
     if not conexion:
-        return
-    
+        return 
     try:
         cursor = conexion.cursor()
         
@@ -65,14 +64,12 @@ def crear_tablas(conexion):
         
         for statement in sql_statements:
             cursor.execute(statement)
-        
         print("✅ Tablas creadas con éxito ✅")
         conexion.commit()
     except sqlite3.Error as ex:
         print("❌ Error al crear las tablas: ❌", ex)
     finally:
         cursor.close()
-
 if __name__ == "__main__":
     conexion = conectar()
     if conexion:
