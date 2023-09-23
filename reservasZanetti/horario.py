@@ -25,7 +25,7 @@ def listar_todos_horario():
         db.close()
         return {"Respuesta": False, "Mensaje": str(ex)}
 
-# Listar una Horario por ID
+# Listar un Horario por ID
 def listar_horario_id(ID_Horario):
     try:
         db = con.conectar()
@@ -132,4 +132,3 @@ def eliminar_horario(ID_Horario):
         miCursor.close()
         db.close()
         return {"Respuesta": False, "Mensaje": str(ex)}
-    
